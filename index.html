@@ -257,6 +257,80 @@
   .rchip.active{background:var(--rose-deep); color:#fff; border-color:var(--rose-deep)}
   .repeat-status{font-size:11px; color:var(--rose-deep); text-align:center; margin-top:6px; display:none}
   .repeat-status.show{display:block}
+  .audio-now-card{
+    margin-bottom:12px; background:var(--card-alt); border:1px solid var(--border);
+    border-radius:18px; padding:12px 14px;
+  }
+  .audio-now-top{display:flex; align-items:center; justify-content:space-between; gap:10px; margin-bottom:5px}
+  .audio-now-top strong{font-size:14px}
+  .audio-now-sub{font-size:12px; color:var(--ink-soft)}
+  .audio-now-chip{
+    display:inline-flex; align-items:center; justify-content:center; white-space:nowrap;
+    font-size:10px; font-weight:700; padding:4px 10px; border-radius:999px;
+    background:var(--card); border:1px solid var(--border); color:var(--rose-deep);
+  }
+  .audio-now-chip.offline{background:#E8F3EA; color:#2F7A46; border-color:#C9E3D0}
+  .audio-now-chip.online{background:#F7EEE0; color:#94631A; border-color:#E8D5B3}
+  .audio-now-chip.unavailable{background:#F7E8E8; color:#A54545; border-color:#E5C1C1}
+  [data-theme="dark"] .audio-now-chip.offline{background:#233428; color:#9FDEAF; border-color:#355341}
+  [data-theme="dark"] .audio-now-chip.online{background:#463A22; color:#F1D08B; border-color:#635230}
+  [data-theme="dark"] .audio-now-chip.unavailable{background:#4A2E32; color:#F2B0B0; border-color:#704349}
+  .audio-controls{gap:10px; flex-wrap:wrap}
+  .p-btn.stop,.p-btn.pause{width:42px; height:42px; font-size:15px}
+  .p-btn.pause{background:var(--card); border:1px solid var(--border)}
+  .audio-action-row{justify-content:flex-start}
+  .audio-action-row .tool-btn{padding:8px 12px}
+  .audio-offline-card{
+    margin-top:12px; background:var(--card-alt); border:1px solid var(--border); border-radius:18px; padding:12px 14px;
+  }
+  .audio-offline-head{display:flex; align-items:flex-start; justify-content:space-between; gap:10px}
+  .audio-offline-title{font-size:13px; font-weight:700}
+  .audio-offline-meta{font-size:11px; color:var(--ink-soft); margin-top:3px}
+  .audio-offline-badge{
+    font-size:10px; font-weight:700; border-radius:999px; padding:4px 10px;
+    background:var(--card); border:1px solid var(--border); color:var(--ink-soft); white-space:nowrap;
+  }
+  .audio-offline-badge.ready{background:#E8F3EA; color:#2F7A46; border-color:#C9E3D0}
+  .audio-offline-badge.partial{background:#FFF1DD; color:#94631A; border-color:#E8D5B3}
+  .audio-offline-badge.busy{background:#F7E8F0; color:#8E446D; border-color:#E7C8D8}
+  .audio-offline-badge.error{background:#F7E8E8; color:#A54545; border-color:#E5C1C1}
+  [data-theme="dark"] .audio-offline-badge.ready{background:#233428; color:#9FDEAF; border-color:#355341}
+  [data-theme="dark"] .audio-offline-badge.partial{background:#463A22; color:#F1D08B; border-color:#635230}
+  [data-theme="dark"] .audio-offline-badge.busy{background:#462B3A; color:#F0BCD5; border-color:#6A4357}
+  [data-theme="dark"] .audio-offline-badge.error{background:#4A2E32; color:#F2B0B0; border-color:#704349}
+  .audio-download-bar{height:9px; background:var(--card); border-radius:999px; overflow:hidden; margin-top:10px}
+  .audio-download-bar > div{height:100%; width:0%; background:linear-gradient(90deg,var(--rose),var(--honey)); transition:width .2s ease}
+  .audio-download-text{font-size:11px; color:var(--ink-soft); margin-top:8px; line-height:1.8}
+  .settings-select{
+    width:100%; background:var(--card-alt); color:var(--ink); border:1px solid var(--border); border-radius:12px;
+    padding:10px 12px; font-family:'Tajawal'; font-size:13px;
+  }
+  .settings-help{font-size:12px; color:var(--ink-soft); line-height:1.8}
+  .download-item{
+    background:var(--card); border:1px solid var(--border); border-radius:16px; padding:12px 14px; margin-bottom:10px;
+  }
+  .download-item-head{display:flex; align-items:flex-start; justify-content:space-between; gap:10px}
+  .download-item-title{font-size:13px; font-weight:700}
+  .download-item-meta{font-size:11px; color:var(--ink-soft); margin-top:4px; line-height:1.7}
+  .download-item-actions{display:flex; gap:8px; flex-wrap:wrap; margin-top:10px}
+  .danger-btn.small,.tool-btn.small{width:auto; padding:8px 12px; font-size:12px}
+  .audio-repeat-list{display:flex; flex-direction:column; gap:10px}
+  .audio-repeat-row{background:var(--card); border:1px solid var(--border); border-radius:16px; padding:12px 14px}
+  .audio-repeat-row-top{display:flex; align-items:center; justify-content:space-between; gap:10px; margin-bottom:6px}
+  .audio-repeat-ayah-title{font-size:13px; font-weight:700}
+  .audio-repeat-preview{font-family:'Amiri Quran','Noto Naskh Arabic',serif; font-size:16px; line-height:1.8; color:var(--ink)}
+  .audio-repeat-controls{display:flex; align-items:center; gap:8px; margin-top:8px; flex-wrap:wrap}
+  .audio-repeat-controls .settings-select{max-width:130px}
+  .audio-inline-note{font-size:11px; color:var(--ink-soft); margin-top:6px}
+  .audio-manager-empty{padding:16px; text-align:center; color:var(--ink-soft); font-size:12px; background:var(--card); border:1px dashed var(--border); border-radius:16px}
+  @media (max-width: 420px){
+    .audio-now-top{align-items:flex-start; flex-direction:column}
+    .audio-controls{gap:8px}
+    .audio-action-row{gap:8px}
+    .audio-action-row .tool-btn{width:100%}
+    .audio-repeat-row-top{align-items:flex-start; flex-direction:column}
+    .audio-repeat-controls .settings-select{max-width:none; width:100%}
+  }
 
   /* Mini Player */
   .mini-player{
@@ -709,25 +783,42 @@
   </div>
   <div class="hint-note" id="hint-note">اضغطي على أي كلمة منقّطة لإظهارها، أو على رقم الآية لإظهار الآية كاملة</div>
 
-  <div class="player">
-    <div class="p-title">تلاوة الشيخ محمود خليل الحصري — كل آية ×٣</div>
+  <div class="player" id="offline-audio-panel">
+    <div class="p-title" id="audio-player-title">القارئ: محمود خليل الحصري — Murattal</div>
+    <div class="audio-now-card" id="audio-now-card">
+      <div class="audio-now-top">
+        <strong id="audio-current-ayah-text">آية 1 من 1</strong>
+        <span class="audio-now-chip offline" id="audio-source-chip">Offline</span>
+      </div>
+      <div class="audio-now-sub" id="audio-current-repeat-text">التكرار الحالي: 1 / 1</div>
+      <div class="audio-now-sub" id="audio-current-surah-text">اختاري سورة لبدء الاستماع</div>
+    </div>
     <div class="p-track" id="p-track" onclick="seekTrack(event)">
       <div class="p-fill" id="p-fill"></div>
     </div>
     <div class="p-times"><span id="p-current">00:00</span><span id="p-duration">00:00</span></div>
-    <div class="p-controls">
-      <button class="p-btn side" onclick="skipSurah(-1)">السابق ›</button>
-      <button class="p-btn play" id="play-btn" onclick="togglePlay()">▶</button>
-      <button class="p-btn side" onclick="skipSurah(1)">‹ التالي</button>
+    <div class="p-controls audio-controls">
+      <button class="p-btn side" onclick="playPreviousAyah()" aria-label="الآية السابقة" title="الآية السابقة">⏮</button>
+      <button class="p-btn play" id="play-btn" onclick="playCurrentSequence()" aria-label="تشغيل" title="تشغيل">▶</button>
+      <button class="p-btn pause" id="pause-btn" onclick="pausePlayback()" aria-label="إيقاف مؤقت" title="إيقاف مؤقت">⏸</button>
+      <button class="p-btn stop" id="stop-btn" onclick="stopPlayback()" aria-label="إيقاف" title="إيقاف">⏹</button>
+      <button class="p-btn side" onclick="playNextAyah()" aria-label="الآية التالية" title="الآية التالية">⏭</button>
     </div>
-    <div class="repeat-row">
-      <span class="repeat-label">تكرار السورة:</span>
-      <button class="rchip active" data-r="1" onclick="setRepeat(1,this)">١</button>
-      <button class="rchip" data-r="2" onclick="setRepeat(2,this)">٢</button>
-      <button class="rchip" data-r="3" onclick="setRepeat(3,this)">٣</button>
-      <button class="rchip" data-r="5" onclick="setRepeat(5,this)">٥</button>
-      <button class="rchip" data-r="10" onclick="setRepeat(10,this)">١٠</button>
-      <button class="rchip" onclick="setCustomRepeat(this)">مخصص</button>
+    <div class="repeat-row audio-action-row">
+      <button class="tool-btn" onclick="openAyahRepeatSheet()">تكرار الآيات</button>
+      <button class="tool-btn" id="offline-download-btn" onclick="downloadCurrentSurahOffline()">تحميل السورة للاستخدام بدون إنترنت</button>
+      <button class="tool-btn" id="offline-retry-btn" onclick="retryFailedDownloads()" style="display:none">إعادة المحاولة</button>
+    </div>
+    <div class="audio-offline-card" id="audio-offline-card">
+      <div class="audio-offline-head">
+        <div>
+          <div class="audio-offline-title" id="audio-offline-surah-title">السورة الحالية</div>
+          <div class="audio-offline-meta" id="audio-offline-surah-meta">اختاري سورة من القائمة الحالية</div>
+        </div>
+        <div class="audio-offline-badge" id="audio-offline-badge">غير محملة</div>
+      </div>
+      <div class="audio-download-bar"><div id="audio-download-fill"></div></div>
+      <div class="audio-download-text" id="audio-download-text">لم يبدأ تنزيل السورة بعد.</div>
     </div>
     <div class="repeat-status" id="repeat-status"></div>
     <div class="audio-status" id="audio-status" aria-live="polite"></div>
@@ -797,11 +888,26 @@
   </div>
 
   <div class="settings-section">
-    <h4>الصوت</h4>
+    <h4>الصوت وOffline</h4>
     <div class="settings-row">
       <div class="label">القارئ</div>
-      <div class="chip-row"><button class="chip active">الشيخ محمود خليل الحصري</button></div>
+      <select id="reciter-select" class="settings-select" onchange="onReciterChange(this.value)"></select>
+      <div class="audio-inline-note" id="reciter-bitrate-note"></div>
     </div>
+    <div class="settings-row">
+      <div class="label">السورة المحددة حاليًا</div>
+      <div class="settings-help" id="current-audio-surah-status">افتحي أي سورة من القائمة الحالية ثم نزّليها للاستخدام بدون إنترنت.</div>
+    </div>
+  </div>
+
+  <div class="settings-section">
+    <h4>التنزيلات Offline</h4>
+    <div class="settings-row">
+      <div class="label">التخزين المستخدم</div>
+      <div class="settings-help" id="audio-storage-used">0 MB</div>
+    </div>
+    <div id="audio-downloads-list"></div>
+    <button class="danger-btn" onclick="clearAllOfflineAudio()">حذف كل التسجيلات</button>
   </div>
 <!-- رَفيقُ حِفْظِكْ -->
   <div class="settings-section">
@@ -886,6 +992,29 @@
   <button class="sheet-close" onclick="closeMutSheet()">✕</button>
   <div class="sheet-handle"></div>
   <div id="mut-sheet-content"></div>
+</div>
+
+<div class="sheet-backdrop" id="audio-repeat-backdrop" onclick="closeAyahRepeatSheet()"></div>
+<div class="bottom-sheet" id="audio-repeat-sheet" role="dialog" aria-modal="true" aria-label="إعداد تكرار الآيات">
+  <button class="sheet-close" onclick="closeAyahRepeatSheet()" aria-label="إغلاق">✕</button>
+  <div class="sheet-handle"></div>
+  <h3 class="sheet-title">تكرار الآيات</h3>
+  <div class="sheet-loc">
+    <div class="loc-head" id="audio-repeat-sheet-head">السورة الحالية</div>
+    <div class="loc-missing">يمكنك ضبط عدد تكرار كل آية بشكل مستقل، وسيتم حفظه محليًا على هذا الجهاز.</div>
+  </div>
+  <div class="settings-row">
+    <div class="label">تطبيق سريع على كل السورة</div>
+    <div class="chip-row">
+      <button class="chip" onclick="applyRepeatPresetToCurrentSurah(1)">1</button>
+      <button class="chip" onclick="applyRepeatPresetToCurrentSurah(2)">2</button>
+      <button class="chip" onclick="applyRepeatPresetToCurrentSurah(3)">3</button>
+      <button class="chip" onclick="applyRepeatPresetToCurrentSurah(5)">5</button>
+      <button class="chip" onclick="applyRepeatPresetToCurrentSurah(10)">10</button>
+      <button class="chip" onclick="applyRepeatPresetToCurrentSurah(20)">20</button>
+    </div>
+  </div>
+  <div class="audio-repeat-list" id="audio-repeat-list"></div>
 </div>
 
 <audio id="player" preload="none"></audio>
@@ -39286,6 +39415,8 @@ let MAX_PAGE = 1;
 let currentPage = 1;
 let pageGesture = {startX:0, startY:0, active:false};
 let BASMALA_TEXT = '';
+let GLOBAL_AYAH_BY_KEY = {};
+let AYAH_SEQUENCE_BY_SURAH = {};
 
 const INTRA_WORD_QURAN_SEPARATORS_RE = /([\p{Script=Arabic}\p{M}])[\u2000-\u200D\u2060\uFEFF]+(?=[\p{Script=Arabic}\p{M}])/gu;
 
@@ -39377,19 +39508,27 @@ function updateSurahHeader(){
 }
 function buildPageIndex(){
   PAGE_INDEX = {};
+  GLOBAL_AYAH_BY_KEY = {};
+  AYAH_SEQUENCE_BY_SURAH = {};
+  let globalAyahNumber = 1;
   ORDER.forEach(num => {
     const surah = QURAN[num];
+    AYAH_SEQUENCE_BY_SURAH[num] = [];
     surah.ayahs.forEach(a => {
       const page = Number(a.page);
+      const ayahN = Number(a.n);
       if(!PAGE_INDEX[page]) PAGE_INDEX[page] = [];
       PAGE_INDEX[page].push({
         surah:num,
         surahName:surah.name,
-        ayahN:a.n,
+        ayahN:ayahN,
         text:a.text,
         page:page,
         juz:a.juz
       });
+      GLOBAL_AYAH_BY_KEY[num + ':' + ayahN] = globalAyahNumber;
+      AYAH_SEQUENCE_BY_SURAH[num].push({ayahNumber:ayahN, globalAyahNumber});
+      globalAyahNumber += 1;
     });
   });
   PAGE_NUMBERS = Object.keys(PAGE_INDEX).map(Number).sort((a,b)=>a-b);
@@ -39916,19 +40055,7 @@ function openSurah(num, resumeAyahN){
   try{ localStorage.setItem('lastSurah', String(currentSurahNum)); }catch(e){}
   markFavoritedAyahs();
   updateSurahFavStar();
-  const loadedNum = audioEl.getAttribute('data-loaded-surah');
-  if(String(loadedNum) === String(currentSurahNum).padStart(3, '0')){
-    document.getElementById('play-btn').textContent = audioEl.paused ? '▶' : '⏸';
-    document.getElementById('p-fill').style.width = (audioEl.duration ? audioEl.currentTime/audioEl.duration*100 : 0) + '%';
-    document.getElementById('p-current').textContent = fmtTime(audioEl.currentTime);
-    document.getElementById('p-duration').textContent = fmtTime(audioEl.duration || 0);
-    setAudioStatus('تشغيل من الذاكرة');
-  } else {
-    document.getElementById('play-btn').textContent = '▶';
-    document.getElementById('p-fill').style.width = '0%';
-    document.getElementById('p-current').textContent = '00:00';
-    document.getElementById('p-duration').textContent = '00:00';
-  }
+  syncAudioStateWithCurrentSurah();
 }
 
 /* ==== موضع القراءة الحالي وملاحظ التقاطع ==== */
@@ -40132,6 +40259,8 @@ function showScreen(id){
     if(el) el.style.display = (s === id) ? 'block' : 'none';
   });
   refreshMiniPlayer();
+  if(id === 'settings-screen') refreshAudioDownloadsUI();
+  if(id === 'surah-screen') syncAudioStateWithCurrentSurah();
   window.scrollTo(0,0);
 }
 
@@ -40356,11 +40485,30 @@ function checkContinue(){
   }
 }
 
-/* ==== مشغل الصوت ==== */
+/* ==== مشغل الصوت Offline + Online Fallback ==== */
 const audioEl = document.getElementById('player');
-let repeatCount = 1;
-let repeatsLeft = 1;
+const AUDIO_RECITERS = [
+  {id:'ar.abdulbasitmurattal', name:'عبد الباسط عبد الصمد — Murattal', shortName:'عبد الباسط عبد الصمد', bitrate:192},
+  {id:'ar.husary', name:'محمود خليل الحصري — Murattal', shortName:'محمود خليل الحصري', bitrate:128},
+  {id:'ar.minshawi', name:'محمد صديق المنشاوي — Murattal', shortName:'محمد صديق المنشاوي', bitrate:128},
+  {id:'ar.alafasy', name:'مشاري راشد العفاسي — Murattal', shortName:'مشاري راشد العفاسي', bitrate:128}
+];
+const RECITER_BY_ID = Object.fromEntries(AUDIO_RECITERS.map(r => [r.id, r]));
+const AUDIO_DB_NAME = 'QuranAudioDB';
+const AUDIO_DB_VERSION = 1;
+const AUDIO_STORE = 'audio';
+const AUDIO_INDEX_STORAGE_KEY = 'offlineAudioIndex.v1';
+const AYAH_REPEAT_STORAGE_PREFIX = 'ayahRepeats:';
+let audioDbPromise = null;
+let audioDownloadIndexCache = null;
 let isPlaying = false;
+let currentObjectUrl = '';
+let playbackAyahs = [];
+let playbackSurahNum = null;
+let playbackAyahIdx = 0;
+let currentRepeatIteration = 1;
+let playbackSessionToken = 0;
+let downloadState = {active:false, reciterId:null, surahNum:null, total:0, completed:0, failedAyahs:[]};
 
 function fmtTime(sec){
   if(!isFinite(sec) || isNaN(sec)) return '00:00';
@@ -40368,50 +40516,708 @@ function fmtTime(sec){
   const s = Math.floor(sec%60).toString().padStart(2,'0');
   return m+':'+s;
 }
-
-async function loadAudioForCurrentSurah(){
-  const cacheKey = String(currentSurahNum).padStart(3, '0');
-  const downloadUrl = AUDIO_URLS[cacheKey];
-  if(!downloadUrl){
-    setAudioStatus('التلاوة غير متوفرة حاليًا');
-    return false;
-  }
-  audioEl.src = downloadUrl;
-  audioEl.setAttribute('data-loaded-surah', cacheKey);
-  setAudioStatus('جاري تحميل التلاوة...');
-  return true;
+function formatBytes(bytes){
+  const n = Number(bytes) || 0;
+  if(n >= 1024*1024*1024) return (n/(1024*1024*1024)).toFixed(1) + ' GB';
+  if(n >= 1024*1024) return (n/(1024*1024)).toFixed(1) + ' MB';
+  if(n >= 1024) return Math.round(n/1024) + ' KB';
+  return n + ' B';
 }
-
+function getSelectedReciterId(){
+  const saved = localStorage.getItem('selectedReciterId');
+  return RECITER_BY_ID[saved] ? saved : 'ar.husary';
+}
+function getSelectedReciter(){
+  return RECITER_BY_ID[getSelectedReciterId()] || AUDIO_RECITERS[1];
+}
+function getAudioStorageKey(reciterId, surahNum, ayahNumber){
+  return reciterId + '_' + Number(surahNum) + '_' + Number(ayahNumber);
+}
+function getAyahKey(surahNum, ayahNumber){
+  return Number(surahNum) + ':' + Number(ayahNumber);
+}
+function getGlobalAyahNumber(surahNum, ayahNumber){
+  return GLOBAL_AYAH_BY_KEY[getAyahKey(surahNum, ayahNumber)] || null;
+}
+function getSurahPlaybackAyahs(surahNum){
+  const s = QURAN[surahNum];
+  if(!s || !s.ayahs) return [];
+  return s.ayahs.map(a => ({ayahNumber:Number(a.n), globalAyahNumber:getGlobalAyahNumber(surahNum, a.n)}));
+}
+function getCurrentPlaybackEntry(){
+  return playbackAyahs[playbackAyahIdx] || null;
+}
+function getRepeatSettingsKey(surahNum){
+  return AYAH_REPEAT_STORAGE_PREFIX + String(Number(surahNum));
+}
+function loadSurahRepeatSettings(surahNum){
+  try{
+    const parsed = JSON.parse(localStorage.getItem(getRepeatSettingsKey(surahNum)) || '{}');
+    return parsed && typeof parsed === 'object' ? parsed : {};
+  }catch(e){
+    return {};
+  }
+}
+function saveSurahRepeatSettings(surahNum, value){
+  localStorage.setItem(getRepeatSettingsKey(surahNum), JSON.stringify(value || {}));
+}
+function getAyahRepeatCount(surahNum, ayahNumber){
+  const map = loadSurahRepeatSettings(surahNum);
+  const n = Number(map[String(ayahNumber)] || 1);
+  return Number.isFinite(n) && n > 0 ? n : 1;
+}
+function setAyahRepeatCount(surahNum, ayahNumber, count){
+  const n = Math.max(1, parseInt(count, 10) || 1);
+  const map = loadSurahRepeatSettings(surahNum);
+  map[String(ayahNumber)] = n;
+  saveSurahRepeatSettings(surahNum, map);
+  if(Number(currentSurahNum) === Number(surahNum) && Number(currentAyahN) === Number(ayahNumber)) updateRepeatStatus();
+}
+function openAudioDB(){
+  if(audioDbPromise) return audioDbPromise;
+  audioDbPromise = new Promise((resolve, reject)=>{
+    const req = indexedDB.open(AUDIO_DB_NAME, AUDIO_DB_VERSION);
+    req.onupgradeneeded = (e)=>{
+      const db = e.target.result;
+      if(!db.objectStoreNames.contains(AUDIO_STORE)) db.createObjectStore(AUDIO_STORE, {keyPath:'key'});
+    };
+    req.onsuccess = ()=> resolve(req.result);
+    req.onerror = ()=> reject(req.error);
+  });
+  return audioDbPromise;
+}
+function audioDbGet(key){
+  return openAudioDB().then(db => new Promise((res, rej)=>{
+    const tx = db.transaction(AUDIO_STORE, 'readonly');
+    const req = tx.objectStore(AUDIO_STORE).get(key);
+    req.onsuccess = ()=> res(req.result || null);
+    req.onerror = ()=> rej(req.error);
+  })).catch(()=>null);
+}
+function audioDbPut(record){
+  return openAudioDB().then(db => new Promise((res, rej)=>{
+    const tx = db.transaction(AUDIO_STORE, 'readwrite');
+    tx.objectStore(AUDIO_STORE).put(record);
+    tx.oncomplete = ()=> res(true);
+    tx.onerror = ()=> rej(tx.error);
+  })).catch(()=>false);
+}
+function audioDbDelete(key){
+  return openAudioDB().then(db => new Promise((res)=>{
+    const tx = db.transaction(AUDIO_STORE, 'readwrite');
+    tx.objectStore(AUDIO_STORE).delete(key);
+    tx.oncomplete = ()=> res(true);
+  })).catch(()=>false);
+}
+function audioDbClear(){
+  return openAudioDB().then(db => new Promise((res)=>{
+    const tx = db.transaction(AUDIO_STORE, 'readwrite');
+    tx.objectStore(AUDIO_STORE).clear();
+    tx.oncomplete = ()=> res(true);
+  })).catch(()=>false);
+}
+function audioDbGetAllByCursor(){
+  return openAudioDB().then(db => new Promise((res, rej)=>{
+    const out = [];
+    const tx = db.transaction(AUDIO_STORE, 'readonly');
+    const req = tx.objectStore(AUDIO_STORE).openCursor();
+    req.onsuccess = ()=>{
+      const cursor = req.result;
+      if(!cursor){ res(out); return; }
+      out.push(cursor.value);
+      cursor.continue();
+    };
+    req.onerror = ()=> rej(req.error);
+  })).catch(()=>[]);
+}
+function loadAudioDownloadIndex(){
+  if(audioDownloadIndexCache) return audioDownloadIndexCache;
+  try{
+    const parsed = JSON.parse(localStorage.getItem(AUDIO_INDEX_STORAGE_KEY) || '{"items":{},"totalBytes":0,"totalRecords":0}');
+    audioDownloadIndexCache = parsed && parsed.items ? parsed : {items:{}, totalBytes:0, totalRecords:0};
+  }catch(e){
+    audioDownloadIndexCache = {items:{}, totalBytes:0, totalRecords:0};
+  }
+  return audioDownloadIndexCache;
+}
+function saveAudioDownloadIndex(index){
+  audioDownloadIndexCache = index;
+  localStorage.setItem(AUDIO_INDEX_STORAGE_KEY, JSON.stringify(index));
+}
+function getDownloadPairKey(reciterId, surahNum){
+  return reciterId + '__' + Number(surahNum);
+}
+async function rebuildAudioDownloadIndexFromDB(){
+  const records = await audioDbGetAllByCursor();
+  const index = {items:{}, totalBytes:0, totalRecords:0};
+  records.forEach(record => {
+    const pairKey = getDownloadPairKey(record.reciterId, record.surahNumber);
+    if(!index.items[pairKey]){
+      index.items[pairKey] = {
+        reciterId: record.reciterId,
+        reciterName: record.reciterName,
+        surahNumber: Number(record.surahNumber),
+        downloadedAyahs: 0,
+        totalAyahs: QURAN[record.surahNumber] ? QURAN[record.surahNumber].ayahCount : 0,
+        sizeBytes: 0,
+        bitrate: record.bitrate,
+        updatedAt: record.downloadedAt
+      };
+    }
+    const item = index.items[pairKey];
+    item.downloadedAyahs += 1;
+    item.sizeBytes += Number(record.sizeBytes || (record.audio && record.audio.size) || 0);
+    item.updatedAt = record.downloadedAt || item.updatedAt;
+    index.totalBytes += Number(record.sizeBytes || (record.audio && record.audio.size) || 0);
+    index.totalRecords += 1;
+  });
+  saveAudioDownloadIndex(index);
+  return index;
+}
+async function upsertDownloadIndexEntry(reciter, surahNum){
+  const index = loadAudioDownloadIndex();
+  const ayahs = getSurahPlaybackAyahs(surahNum);
+  let downloadedAyahs = 0;
+  let sizeBytes = 0;
+  for(const entry of ayahs){
+    const record = await audioDbGet(getAudioStorageKey(reciter.id, surahNum, entry.ayahNumber));
+    if(record && isStoredAudioBlob(record.audio)){
+      downloadedAyahs += 1;
+      sizeBytes += Number(record.sizeBytes || record.audio.size || 0);
+    }
+  }
+  const pairKey = getDownloadPairKey(reciter.id, surahNum);
+  if(downloadedAyahs){
+    index.items[pairKey] = {
+      reciterId: reciter.id,
+      reciterName: reciter.name,
+      surahNumber: Number(surahNum),
+      downloadedAyahs,
+      totalAyahs: ayahs.length,
+      sizeBytes,
+      bitrate: reciter.bitrate,
+      updatedAt: new Date().toISOString()
+    };
+  } else {
+    delete index.items[pairKey];
+  }
+  index.totalBytes = Object.values(index.items).reduce((sum, item)=> sum + Number(item.sizeBytes || 0), 0);
+  index.totalRecords = Object.values(index.items).reduce((sum, item)=> sum + Number(item.downloadedAyahs || 0), 0);
+  saveAudioDownloadIndex(index);
+  return index.items[pairKey] || null;
+}
 function setAudioStatus(text){
   const status = document.getElementById('audio-status');
   if(status) status.textContent = text || '';
 }
-
-async function togglePlay(){
-  if(audioEl.getAttribute('data-loaded-surah') !== String(currentSurahNum).padStart(3, '0')){
-    const loaded = await loadAudioForCurrentSurah();
-    if(!loaded) return;
-  }
-  if(audioEl.paused){
-    try{ await audioEl.play(); }catch(error){
-      console.error(error);
-      setAudioStatus('تعذر تشغيل التلاوة');
-    }
-  } else {
-    audioEl.pause();
+function isStoredAudioBlob(value){
+  return !!(value && typeof value.size === 'number' && typeof value.type === 'string');
+}
+function safeAudioPause(){
+  try{ audioEl.pause(); }catch(e){}
+}
+function safeAudioLoad(){
+  try{ audioEl.load(); }catch(e){}
+}
+function setAudioSourceChip(mode, label){
+  const chip = document.getElementById('audio-source-chip');
+  if(!chip) return;
+  chip.className = 'audio-now-chip ' + (mode || 'offline');
+  chip.textContent = label || '';
+}
+function revokeCurrentAudioObjectUrl(){
+  if(currentObjectUrl){
+    try{ URL.revokeObjectURL(currentObjectUrl); }catch(e){}
+    currentObjectUrl = '';
   }
 }
+function resetPlayerTimeUI(){
+  const fill = document.getElementById('p-fill');
+  const cur = document.getElementById('p-current');
+  const dur = document.getElementById('p-duration');
+  if(fill) fill.style.width = '0%';
+  if(cur) cur.textContent = '00:00';
+  if(dur) dur.textContent = '00:00';
+  const mt = document.getElementById('mini-player-time');
+  if(mt) mt.textContent = '00:00';
+}
+function buildAudioUrl(reciter, globalAyahNumber){
+  return 'https://cdn.islamic.network/quran/audio/' + reciter.bitrate + '/' + reciter.id + '/' + globalAyahNumber + '.mp3';
+}
+function getCurrentAyahPlaybackIndex(){
+  if(!currentSurahNum) return 0;
+  const target = Number(currentAyahN || (QURAN[currentSurahNum] && QURAN[currentSurahNum].ayahs[0] ? QURAN[currentSurahNum].ayahs[0].n : 1));
+  const list = getSurahPlaybackAyahs(currentSurahNum);
+  const idx = list.findIndex(item => item.ayahNumber === target);
+  return idx >= 0 ? idx : 0;
+}
+function ensurePlaybackList(){
+  if(!currentSurahNum) return [];
+  if(Number(playbackSurahNum) !== Number(currentSurahNum)) {
+    playbackSurahNum = Number(currentSurahNum);
+    playbackAyahs = getSurahPlaybackAyahs(currentSurahNum);
+    playbackAyahIdx = getCurrentAyahPlaybackIndex();
+    currentRepeatIteration = 1;
+  } else if(!playbackAyahs.length){
+    playbackAyahs = getSurahPlaybackAyahs(currentSurahNum);
+  }
+  return playbackAyahs;
+}
+async function resolveAyahAudioSource(reciter, surahNum, ayahNumber){
+  const key = getAudioStorageKey(reciter.id, surahNum, ayahNumber);
+  const record = await audioDbGet(key);
+  if(record && isStoredAudioBlob(record.audio)){
+    return {mode:'offline', label:'Offline', record, key};
+  }
+  const globalAyahNumber = getGlobalAyahNumber(surahNum, ayahNumber);
+  if(!navigator.onLine){
+    return {mode:'unavailable', label:'غير متاح', key, globalAyahNumber};
+  }
+  return {mode:'online', label:'مباشر', src:buildAudioUrl(reciter, globalAyahNumber), key, globalAyahNumber};
+}
+async function loadAyahIntoPlayer(surahNum, ayahNumber, options){
+  options = options || {};
+  const reciter = getSelectedReciter();
+  const token = ++playbackSessionToken;
+  const source = await resolveAyahAudioSource(reciter, surahNum, ayahNumber);
+  if(token !== playbackSessionToken) return false;
+  revokeCurrentAudioObjectUrl();
+  safeAudioPause();
+  audioEl.removeAttribute('src');
+  safeAudioLoad();
+  if(source.mode === 'unavailable'){
+    setAudioSourceChip('unavailable', 'غير متاح');
+    setAudioStatus('هذه السورة غير متاحة Offline. اتصل بالإنترنت لتحميلها.');
+    resetPlayerTimeUI();
+    return false;
+  }
+  if(source.mode === 'offline'){
+    currentObjectUrl = URL.createObjectURL(source.record.audio);
+    audioEl.src = currentObjectUrl;
+    setAudioSourceChip('offline', 'Offline');
+    setAudioStatus('تشغيل بدون إنترنت');
+  } else {
+    audioEl.src = source.src;
+    setAudioSourceChip('online', 'مباشر');
+    setAudioStatus('تشغيل مباشر من الإنترنت');
+  }
+  audioEl.setAttribute('data-loaded-key', source.key);
+  audioEl.setAttribute('data-loaded-surah', String(Number(surahNum)).padStart(3,'0'));
+  audioEl.setAttribute('data-loaded-ayah', String(Number(ayahNumber)));
+  audioEl.setAttribute('data-loaded-reciter', reciter.id);
+  safeAudioLoad();
+  updateAudioNowCard();
+  if(options.autoplay){
+    try{
+      await audioEl.play();
+    }catch(error){
+      console.error(error);
+      setAudioStatus('تعذر تشغيل الآية الحالية');
+      return false;
+    }
+  }
+  return true;
+}
+function updateRepeatStatus(done){
+  const el = document.getElementById('repeat-status');
+  if(!el || !currentSurahNum) return;
+  const entry = getCurrentPlaybackEntry() || {ayahNumber:currentAyahN || 1};
+  const total = getAyahRepeatCount(currentSurahNum, entry.ayahNumber);
+  const current = Math.min(currentRepeatIteration, total);
+  el.classList.add('show');
+  el.textContent = done ? 'انتهى تشغيل السورة ✓' : ('التكرار الحالي: ' + current + ' / ' + total);
+  const repeatText = document.getElementById('audio-current-repeat-text');
+  if(repeatText) repeatText.textContent = 'التكرار الحالي: ' + current + ' / ' + total;
+}
+function updateAudioNowCard(){
+  const s = QURAN[currentSurahNum];
+  const currentAyahLabel = document.getElementById('audio-current-ayah-text');
+  const currentSurahLabel = document.getElementById('audio-current-surah-text');
+  const title = document.getElementById('audio-player-title');
+  const reciter = getSelectedReciter();
+  const list = ensurePlaybackList();
+  const entry = getCurrentPlaybackEntry() || list[0];
+  if(title) title.textContent = 'القارئ: ' + reciter.name;
+  if(currentAyahLabel && s && entry) currentAyahLabel.textContent = 'آية ' + entry.ayahNumber + ' من ' + s.ayahs.length;
+  if(currentSurahLabel && s && entry) currentSurahLabel.textContent = 'سورة ' + s.name + ' — الآية الحالية ' + entry.ayahNumber;
+  updateRepeatStatus();
+}
+async function getOfflineProgressForSurah(reciterId, surahNum){
+  const s = QURAN[surahNum];
+  const total = s ? s.ayahs.length : 0;
+  if(!s) return {downloaded:0, total:0, sizeBytes:0, complete:false};
+  const index = loadAudioDownloadIndex();
+  const cached = index.items[getDownloadPairKey(reciterId, surahNum)];
+  if(cached){
+    return {downloaded:cached.downloadedAyahs, total:cached.totalAyahs || total, sizeBytes:cached.sizeBytes || 0, complete:cached.downloadedAyahs === (cached.totalAyahs || total)};
+  }
+  return {downloaded:0, total, sizeBytes:0, complete:false};
+}
+async function refreshCurrentSurahOfflineUI(){
+  const title = document.getElementById('audio-offline-surah-title');
+  const meta = document.getElementById('audio-offline-surah-meta');
+  const badge = document.getElementById('audio-offline-badge');
+  const text = document.getElementById('audio-download-text');
+  const fill = document.getElementById('audio-download-fill');
+  const button = document.getElementById('offline-download-btn');
+  const retryBtn = document.getElementById('offline-retry-btn');
+  const currentStatus = document.getElementById('current-audio-surah-status');
+  if(!currentSurahNum || !QURAN[currentSurahNum]){
+    if(title) title.textContent = 'السورة الحالية';
+    if(meta) meta.textContent = 'اختاري سورة من القائمة الحالية';
+    if(text) text.textContent = 'لم يبدأ تنزيل السورة بعد.';
+    if(fill) fill.style.width = '0%';
+    if(button) button.disabled = true;
+    if(retryBtn) retryBtn.style.display = 'none';
+    return;
+  }
+  const reciter = getSelectedReciter();
+  const s = QURAN[currentSurahNum];
+  const progress = await getOfflineProgressForSurah(reciter.id, currentSurahNum);
+  const pct = progress.total ? Math.round((progress.downloaded / progress.total) * 100) : 0;
+  if(title) title.textContent = 'سورة ' + s.name;
+  if(meta) meta.textContent = s.ayahs.length + ' آية · القارئ: ' + reciter.shortName + ' · الجودة: ' + reciter.bitrate + ' kbps';
+  if(fill) fill.style.width = pct + '%';
+  if(button) button.disabled = downloadState.active && Number(downloadState.surahNum) === Number(currentSurahNum) && downloadState.reciterId === reciter.id;
+  if(retryBtn) retryBtn.style.display = downloadState.failedAyahs.length && Number(downloadState.surahNum) === Number(currentSurahNum) && downloadState.reciterId === reciter.id ? 'inline-flex' : 'none';
+  if(downloadState.active && Number(downloadState.surahNum) === Number(currentSurahNum) && downloadState.reciterId === reciter.id){
+    if(badge){ badge.className = 'audio-offline-badge busy'; badge.textContent = 'جارٍ التحميل'; }
+    if(text) text.textContent = 'جاري تحميل سورة ' + s.name + ' — ' + downloadState.completed + ' / ' + downloadState.total + ' (' + Math.round((downloadState.completed / Math.max(1, downloadState.total))*100) + '%)';
+  } else if(progress.complete){
+    if(badge){ badge.className = 'audio-offline-badge ready'; badge.textContent = '✓ Offline'; }
+    if(text) text.textContent = 'تم تحميل ' + progress.downloaded + ' / ' + progress.total + ' آية · الحجم التقريبي ' + formatBytes(progress.sizeBytes);
+  } else if(progress.downloaded > 0){
+    if(badge){ badge.className = 'audio-offline-badge partial'; badge.textContent = 'جزئي'; }
+    if(text) text.textContent = progress.downloaded + ' / ' + progress.total + ' آية محمّلة · المتبقي سيُحمَّل عند الطلب';
+  } else {
+    if(badge){ badge.className = 'audio-offline-badge'; badge.textContent = navigator.onLine ? 'غير محملة' : 'أوفلاين'; }
+    if(text) text.textContent = navigator.onLine ? 'يمكنك تحميل السورة كاملة للاستخدام بدون إنترنت.' : 'هذه السورة غير متاحة Offline. اتصل بالإنترنت لتحميلها.';
+  }
+  if(currentStatus) currentStatus.textContent = 'السورة الحالية: سورة ' + s.name + ' — ' + progress.downloaded + ' / ' + progress.total + ' آية محمّلة للقارئ ' + reciter.shortName + '.';
+}
+function refreshReciterUI(){
+  const select = document.getElementById('reciter-select');
+  const note = document.getElementById('reciter-bitrate-note');
+  if(select && !select.options.length){
+    select.innerHTML = AUDIO_RECITERS.map(r => '<option value="' + r.id + '">' + r.name + '</option>').join('');
+  }
+  if(select) select.value = getSelectedReciterId();
+  const current = getSelectedReciter();
+  if(note){
+    note.textContent = current.id === 'ar.abdulbasitmurattal'
+      ? 'هذا القارئ متاح رسميًا على مستوى الآية بجودة 192 kbps بدل 128 kbps.'
+      : 'الجودة الافتراضية لهذا القارئ: ' + current.bitrate + ' kbps.';
+  }
+}
+async function refreshAudioDownloadsUI(){
+  refreshReciterUI();
+  const list = document.getElementById('audio-downloads-list');
+  const storage = document.getElementById('audio-storage-used');
+  if(!list || !storage) return;
+  let index = loadAudioDownloadIndex();
+  if(!Object.keys(index.items || {}).length){
+    index = await rebuildAudioDownloadIndexFromDB();
+  }
+  storage.textContent = formatBytes(index.totalBytes || 0);
+  const items = Object.values(index.items || {}).sort((a,b)=> String(b.updatedAt||'').localeCompare(String(a.updatedAt||'')));
+  if(!items.length){
+    list.innerHTML = '<div class="audio-manager-empty">لا توجد تسجيلات Offline حتى الآن.</div>';
+    return;
+  }
+  list.innerHTML = items.map(item => {
+    const surah = QURAN[item.surahNumber];
+    const complete = Number(item.downloadedAyahs) === Number(item.totalAyahs);
+    return '<div class="download-item">' +
+      '<div class="download-item-head">' +
+        '<div>' +
+          '<div class="download-item-title">' + (item.reciterName || item.reciterId) + '</div>' +
+          '<div class="download-item-meta">سورة ' + (surah ? surah.name : item.surahNumber) + '<br>' + item.downloadedAyahs + ' / ' + item.totalAyahs + ' آية · ' + formatBytes(item.sizeBytes) + '<br>' + (complete ? '✓ Offline' : 'تحميل جزئي') + '</div>' +
+        '</div>' +
+        '<div class="audio-offline-badge ' + (complete ? 'ready' : 'partial') + '">' + (complete ? '✓ Offline' : 'جزئي') + '</div>' +
+      '</div>' +
+      '<div class="download-item-actions">' +
+        '<button class="tool-btn small" onclick="openSurah(' + item.surahNumber + ');">فتح السورة</button>' +
+        '<button class="danger-btn small" onclick="deleteOfflineSurahAudio(\'' + item.reciterId + '\',' + item.surahNumber + ')">حذف</button>' +
+      '</div>' +
+    '</div>';
+  }).join('');
+}
+async function onReciterChange(reciterId){
+  if(!RECITER_BY_ID[reciterId]) return;
+  localStorage.setItem('selectedReciterId', reciterId);
+  stopPlayback(true);
+  refreshReciterUI();
+  await refreshCurrentSurahOfflineUI();
+  await refreshAudioDownloadsUI();
+  updateAudioNowCard();
+}
+async function syncAudioStateWithCurrentSurah(){
+  ensurePlaybackList();
+  updateAudioNowCard();
+  await refreshCurrentSurahOfflineUI();
+  refreshMiniPlayer();
+}
+async function loadAudioForCurrentSurah(){
+  if(!currentSurahNum || !QURAN[currentSurahNum]) return false;
+  ensurePlaybackList();
+  if(!playbackAyahs.length) return false;
+  playbackAyahIdx = getCurrentAyahPlaybackIndex();
+  currentRepeatIteration = 1;
+  return await loadAyahIntoPlayer(currentSurahNum, playbackAyahs[playbackAyahIdx].ayahNumber, {autoplay:false});
+}
 
+async function downloadAyahForOffline(reciter, surahNum, ayahNumber){
+  const key = getAudioStorageKey(reciter.id, surahNum, ayahNumber);
+  const existing = await audioDbGet(key);
+  if(existing && isStoredAudioBlob(existing.audio)) return {status:'cached', record:existing};
+  const globalAyahNumber = getGlobalAyahNumber(surahNum, ayahNumber);
+  const url = buildAudioUrl(reciter, globalAyahNumber);
+  const response = await fetch(url, {cache:'no-store'});
+  if(!response.ok) throw new Error('HTTP ' + response.status);
+  const audioBlob = await response.blob();
+  const record = {
+    key,
+    reciterId: reciter.id,
+    reciterName: reciter.name,
+    surahNumber: Number(surahNum),
+    ayahNumber: Number(ayahNumber),
+    globalAyahNumber: Number(globalAyahNumber),
+    audio: audioBlob,
+    bitrate: reciter.bitrate,
+    sizeBytes: audioBlob.size || 0,
+    downloadedAt: new Date().toISOString()
+  };
+  await audioDbPut(record);
+  return {status:'downloaded', record};
+}
+async function downloadCurrentSurahOffline(onlyFailedAyahs){
+  if(!currentSurahNum || !QURAN[currentSurahNum]) return;
+  const reciter = getSelectedReciter();
+  const s = QURAN[currentSurahNum];
+  const targetAyahs = Array.isArray(onlyFailedAyahs) && onlyFailedAyahs.length ? onlyFailedAyahs.map(Number) : s.ayahs.map(a => Number(a.n));
+  if(!navigator.onLine){
+    const progress = await getOfflineProgressForSurah(reciter.id, currentSurahNum);
+    if(progress.complete){
+      setAudioStatus('✓ متاحة Offline بالفعل');
+      await refreshCurrentSurahOfflineUI();
+      return;
+    }
+    setAudioStatus('هذه السورة غير متاحة Offline. اتصل بالإنترنت لتحميلها.');
+    await refreshCurrentSurahOfflineUI();
+    return;
+  }
+  downloadState = {active:true, reciterId:reciter.id, surahNum:Number(currentSurahNum), total:targetAyahs.length, completed:0, failedAyahs:[]};
+  await refreshCurrentSurahOfflineUI();
+  for(const ayahNumber of targetAyahs){
+    try{
+      const result = await downloadAyahForOffline(reciter, currentSurahNum, ayahNumber);
+      downloadState.completed += 1;
+      if(result.status === 'cached'){
+        setAudioStatus('الآية ' + ayahNumber + ' محفوظة مسبقًا.');
+      } else {
+        setAudioStatus('تم تنزيل الآية ' + ayahNumber);
+      }
+    }catch(error){
+      console.error(error);
+      downloadState.completed += 1;
+      downloadState.failedAyahs.push(ayahNumber);
+      setAudioStatus('تعذر تحميل الآية ' + ayahNumber);
+    }
+    await upsertDownloadIndexEntry(reciter, currentSurahNum);
+    await refreshCurrentSurahOfflineUI();
+  }
+  downloadState.active = false;
+  await upsertDownloadIndexEntry(reciter, currentSurahNum);
+  await refreshCurrentSurahOfflineUI();
+  await refreshAudioDownloadsUI();
+  if(downloadState.failedAyahs.length){
+    setAudioStatus('اكتمل التحميل مع أخطاء في الآيات: ' + downloadState.failedAyahs.join('، '));
+  } else {
+    setAudioStatus('✓ تم تحميل السورة ويمكن استخدامها بدون إنترنت');
+  }
+}
+function retryFailedDownloads(){
+  if(!downloadState.failedAyahs.length) return;
+  const failed = downloadState.failedAyahs.slice();
+  downloadState.failedAyahs = [];
+  downloadCurrentSurahOffline(failed);
+}
+async function deleteOfflineSurahAudio(reciterId, surahNum){
+  const reciter = RECITER_BY_ID[reciterId];
+  const s = QURAN[surahNum];
+  if(!reciter || !s) return;
+  if(!confirm('سيتم حذف تسجيلات سورة ' + s.name + ' للقارئ ' + reciter.shortName + ' فقط. متأكدة؟')) return;
+  for(const ayah of s.ayahs){
+    await audioDbDelete(getAudioStorageKey(reciterId, surahNum, ayah.n));
+  }
+  await upsertDownloadIndexEntry(reciter, surahNum);
+  await refreshCurrentSurahOfflineUI();
+  await refreshAudioDownloadsUI();
+  if(Number(currentSurahNum) === Number(surahNum) && getSelectedReciterId() === reciterId){
+    stopPlayback(true);
+  }
+}
+async function clearAllOfflineAudio(){
+  if(!confirm('سيتم حذف كل التسجيلات المحفوظة Offline نهائيًا. متأكدة؟')) return;
+  await audioDbClear();
+  saveAudioDownloadIndex({items:{}, totalBytes:0, totalRecords:0});
+  stopPlayback(true);
+  await refreshCurrentSurahOfflineUI();
+  await refreshAudioDownloadsUI();
+  setAudioStatus('تم حذف كل التسجيلات المحفوظة.');
+}
+function seekTrack(e){
+  const track = document.getElementById('p-track');
+  const rect = track.getBoundingClientRect();
+  const ratio = 1 - ((e.clientX - rect.left) / rect.width);
+  if(audioEl.duration){
+    audioEl.currentTime = Math.max(0, Math.min(1, ratio)) * audioEl.duration;
+  }
+}
+async function goToPlaybackAyahIndex(index, options){
+  options = options || {};
+  const list = ensurePlaybackList();
+  if(!list.length) return false;
+  const targetIdx = Math.max(0, Math.min(list.length - 1, Number(index) || 0));
+  playbackAyahIdx = targetIdx;
+  const entry = list[targetIdx];
+  currentRepeatIteration = 1;
+  scrollToAyah(entry.ayahNumber, currentSurahNum);
+  await loadAyahIntoPlayer(currentSurahNum, entry.ayahNumber, {autoplay:options.autoplay});
+  updateAudioNowCard();
+  return true;
+}
+async function playCurrentSequence(){
+  if(!currentSurahNum || !QURAN[currentSurahNum]) return;
+  ensurePlaybackList();
+  if(!playbackAyahs.length) return;
+  const loadedSurah = Number(audioEl.getAttribute('data-loaded-surah') || 0);
+  const loadedAyah = Number(audioEl.getAttribute('data-loaded-ayah') || 0);
+  const loadedReciter = audioEl.getAttribute('data-loaded-reciter') || '';
+  const targetAyah = Number(currentAyahN || playbackAyahs[playbackAyahIdx].ayahNumber);
+  const targetIdx = playbackAyahs.findIndex(item => item.ayahNumber === targetAyah);
+  if(targetIdx >= 0) playbackAyahIdx = targetIdx;
+  if(loadedSurah === Number(currentSurahNum) && loadedAyah === Number(playbackAyahs[playbackAyahIdx].ayahNumber) && loadedReciter === getSelectedReciterId() && audioEl.src){
+    try{ await audioEl.play(); }catch(error){ console.error(error); setAudioStatus('تعذر استئناف التشغيل'); }
+    return;
+  }
+  await goToPlaybackAyahIndex(playbackAyahIdx, {autoplay:true});
+}
+function togglePlay(){
+  if(audioEl.paused) return playCurrentSequence();
+  return pausePlayback();
+}
+function pausePlayback(){
+  audioEl.pause();
+  setAudioStatus('تم إيقاف التشغيل مؤقتًا');
+}
+function stopPlayback(silent){
+  playbackSessionToken += 1;
+  safeAudioPause();
+  try{ audioEl.currentTime = 0; }catch(e){}
+  revokeCurrentAudioObjectUrl();
+  audioEl.removeAttribute('src');
+  audioEl.removeAttribute('data-loaded-key');
+  audioEl.removeAttribute('data-loaded-surah');
+  audioEl.removeAttribute('data-loaded-ayah');
+  audioEl.removeAttribute('data-loaded-reciter');
+  audioEl.load();
+  currentRepeatIteration = 1;
+  resetPlayerTimeUI();
+  updateRepeatStatus();
+  if(!silent) setAudioStatus('تم إيقاف التشغيل');
+  refreshMiniPlayer();
+}
+function playPreviousAyah(){
+  ensurePlaybackList();
+  if(!playbackAyahs.length) return;
+  goToPlaybackAyahIndex(playbackAyahIdx - 1, {autoplay:!audioEl.paused || isPlaying});
+}
+function playNextAyah(){
+  ensurePlaybackList();
+  if(!playbackAyahs.length) return;
+  goToPlaybackAyahIndex(playbackAyahIdx + 1, {autoplay:!audioEl.paused || isPlaying});
+}
+function updateMiniPlayer(){
+  const s = QURAN[currentSurahNum];
+  const entry = getCurrentPlaybackEntry();
+  const label = s ? ('▶ سورة ' + s.name + (entry ? ' · آية ' + entry.ayahNumber : '')) : '▶';
+  document.getElementById('mini-player-text').textContent = label;
+}
+function refreshMiniPlayer(){
+  const mp = document.getElementById('mini-player');
+  const onSurahScreen = document.getElementById('surah-screen').style.display === 'block';
+  if(isPlaying && !onSurahScreen && currentSurahNum){
+    mp.classList.add('show');
+    updateMiniPlayer();
+  } else {
+    mp.classList.remove('show');
+  }
+}
+function openAyahRepeatSheet(){
+  if(!currentSurahNum || !QURAN[currentSurahNum]) return;
+  const sheet = document.getElementById('audio-repeat-sheet');
+  const backdrop = document.getElementById('audio-repeat-backdrop');
+  const head = document.getElementById('audio-repeat-sheet-head');
+  const list = document.getElementById('audio-repeat-list');
+  const s = QURAN[currentSurahNum];
+  head.textContent = 'سورة ' + s.name + ' — ' + s.ayahs.length + ' آية';
+  list.innerHTML = s.ayahs.map(a => {
+    const preview = normalizeVerseSpacing(a.text).slice(0, 120);
+    const repeat = getAyahRepeatCount(currentSurahNum, a.n);
+    return '<div class="audio-repeat-row">' +
+      '<div class="audio-repeat-row-top">' +
+        '<div class="audio-repeat-ayah-title">آية ' + a.n + '</div>' +
+        '<div class="audio-inline-note">الحالي: ' + repeat + ' مرة</div>' +
+      '</div>' +
+      '<div class="audio-repeat-preview">' + preview + '</div>' +
+      '<div class="audio-repeat-controls">' +
+        '<select class="settings-select audio-repeat-select" onchange="setAyahRepeatSelect(' + currentSurahNum + ',' + a.n + ', this.value)">' + [1,2,3,5,10,20].map(n => '<option value="' + n + '" ' + (n === repeat ? 'selected' : '') + '>' + n + '</option>').join('') + '</select>' +
+        '<button class="chip" onclick="setCustomAyahRepeat(' + currentSurahNum + ',' + a.n + ')">رقم مخصص</button>' +
+      '</div>' +
+    '</div>';
+  }).join('');
+  backdrop.classList.add('show');
+  sheet.classList.add('show');
+}
+function closeAyahRepeatSheet(){
+  document.getElementById('audio-repeat-backdrop').classList.remove('show');
+  document.getElementById('audio-repeat-sheet').classList.remove('show');
+}
+function setAyahRepeatSelect(surahNum, ayahNumber, value){
+  setAyahRepeatCount(surahNum, ayahNumber, Number(value));
+  if(Number(currentSurahNum) === Number(surahNum) && Number(currentAyahN) === Number(ayahNumber)) updateAudioNowCard();
+  openAyahRepeatSheet();
+}
+function setCustomAyahRepeat(surahNum, ayahNumber){
+  const val = prompt('عدد مرات التكرار لهذه الآية', String(getAyahRepeatCount(surahNum, ayahNumber)));
+  const n = parseInt(val, 10);
+  if(!n || n < 1) return;
+  setAyahRepeatCount(surahNum, ayahNumber, n);
+  if(Number(currentSurahNum) === Number(surahNum) && Number(currentAyahN) === Number(ayahNumber)) updateAudioNowCard();
+  openAyahRepeatSheet();
+}
+function applyRepeatPresetToCurrentSurah(count){
+  if(!currentSurahNum || !QURAN[currentSurahNum]) return;
+  const map = {};
+  QURAN[currentSurahNum].ayahs.forEach(a => map[String(a.n)] = Number(count));
+  saveSurahRepeatSettings(currentSurahNum, map);
+  updateAudioNowCard();
+  openAyahRepeatSheet();
+}
 audioEl.addEventListener('play', ()=>{
   isPlaying = true;
-  document.getElementById('play-btn').textContent = '⏸';
+  document.getElementById('play-btn').textContent = '▶';
+  document.getElementById('pause-btn').disabled = false;
   document.getElementById('mp-play-btn').textContent = '⏸';
   updateMiniPlayer();
+  refreshMiniPlayer();
 });
 audioEl.addEventListener('pause', ()=>{
   isPlaying = false;
   document.getElementById('play-btn').textContent = '▶';
   document.getElementById('mp-play-btn').textContent = '▶';
+  refreshMiniPlayer();
 });
 audioEl.addEventListener('timeupdate', ()=>{
   const pct = audioEl.duration ? (audioEl.currentTime/audioEl.duration*100) : 0;
@@ -40424,90 +41230,37 @@ audioEl.addEventListener('timeupdate', ()=>{
 });
 audioEl.addEventListener('loadedmetadata', ()=>{
   const dur = document.getElementById('p-duration');
-  if(dur) dur.textContent = fmtTime(audioEl.duration);
-  setAudioStatus('تم تحميل التلاوة');
+  if(dur) dur.textContent = fmtTime(audioEl.duration || 0);
 });
 audioEl.addEventListener('error', ()=>{
-  setAudioStatus('تعذر تحميل التلاوة');
+  setAudioStatus('تعذر تحميل أو تشغيل الآية الحالية');
 });
-audioEl.addEventListener('ended', ()=>{
-  if(repeatsLeft > 1){
-    repeatsLeft -= 1;
+audioEl.addEventListener('ended', async ()=>{
+  const entry = getCurrentPlaybackEntry();
+  if(!entry || !currentSurahNum) return;
+  const totalRepeats = getAyahRepeatCount(currentSurahNum, entry.ayahNumber);
+  if(currentRepeatIteration < totalRepeats){
+    currentRepeatIteration += 1;
     updateRepeatStatus();
-    audioEl.currentTime = 0;
-    audioEl.play();
+    try{
+      audioEl.currentTime = 0;
+      await audioEl.play();
+    }catch(error){
+      console.error(error);
+      setAudioStatus('تعذر إعادة تشغيل الآية الحالية');
+    }
+    return;
+  }
+  if(playbackAyahIdx < playbackAyahs.length - 1){
+    await goToPlaybackAyahIndex(playbackAyahIdx + 1, {autoplay:true});
   } else {
     updateRepeatStatus(true);
+    setAudioStatus('اكتمل تشغيل السورة.');
+    stopPlayback(true);
   }
 });
-
-function seekTrack(e){
-  const track = document.getElementById('p-track');
-  const rect = track.getBoundingClientRect();
-  // RTL: right edge = 0%, left edge = 100%
-  const ratio = 1 - ((e.clientX - rect.left) / rect.width);
-  if(audioEl.duration){
-    audioEl.currentTime = Math.max(0, Math.min(1, ratio)) * audioEl.duration;
-  }
-}
-
-function skipSurah(dir){
-  const idx = ORDER.indexOf(currentSurahNum);
-  const newIdx = idx + dir;
-  if(newIdx >= 0 && newIdx < ORDER.length){
-    const wasPlaying = isPlaying;
-    openSurah(ORDER[newIdx]);
-    if(wasPlaying){
-      loadAudioForCurrentSurah().then(loaded => { if(loaded) audioEl.play(); });
-    }
-  }
-}
-
-function setRepeat(n, btn){
-  repeatCount = n;
-  repeatsLeft = n;
-  document.querySelectorAll('.rchip').forEach(c => c.classList.remove('active'));
-  btn.classList.add('active');
-  updateRepeatStatus();
-}
-
-function setCustomRepeat(btn){
-  const val = prompt('عدد مرات التكرار؟', '4');
-  const n = parseInt(val);
-  if(n && n > 0){
-    document.querySelectorAll('.rchip').forEach(c => c.classList.remove('active'));
-    btn.classList.add('active');
-    btn.textContent = n;
-    setRepeat(n, btn);
-  }
-}
-
-function updateRepeatStatus(done){
-  const el = document.getElementById('repeat-status');
-  if(!el) return;
-  if(repeatCount <= 1){ el.classList.remove('show'); return; }
-  el.classList.add('show');
-  el.textContent = done ? 'خلصت كل التكرارات ✓' : ('تكرار ' + (repeatCount - repeatsLeft + 1) + ' من ' + repeatCount);
-}
-
-function updateMiniPlayer(){
-  const s = QURAN[currentSurahNum];
-  document.getElementById('mini-player-text').textContent = '▶ سورة ' + s.name;
-}
-
-// إظهار/إخفاء Mini Player حسب الشاشة الحالية وحالة التشغيل
-function refreshMiniPlayer(){
-  const mp = document.getElementById('mini-player');
-  const onSurahScreen = document.getElementById('surah-screen').style.display === 'block';
-  if(isPlaying && !onSurahScreen && currentSurahNum){
-    mp.classList.add('show');
-    updateMiniPlayer();
-  } else {
-    mp.classList.remove('show');
-  }
-}
-audioEl.addEventListener('play', refreshMiniPlayer);
-audioEl.addEventListener('pause', refreshMiniPlayer);
+window.addEventListener('online', ()=> refreshCurrentSurahOfflineUI());
+window.addEventListener('offline', ()=> refreshCurrentSurahOfflineUI());
 
 /* ==== المفضلة ==== */
 function getFavorites(){
@@ -40880,6 +41633,10 @@ async function initializeApp(){
     buildSurahList();
     setupMushafInteractions();
     checkContinue();
+    await rebuildAudioDownloadIndexFromDB();
+    refreshReciterUI();
+    await syncAudioStateWithCurrentSurah();
+    await refreshAudioDownloadsUI();
   }catch(error){
     console.error(error);
     document.getElementById('surah-list').innerHTML = '<div class="empty-note">تعذر تحميل بيانات القرآن.</div>';
