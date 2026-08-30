@@ -40494,6 +40494,7 @@ const AUDIO_RECITERS = [
   {id:'ar.alafasy', name:'مشاري راشد العفاسي — Murattal', shortName:'مشاري راشد العفاسي', bitrate:128}
 ];
 const RECITER_BY_ID = Object.fromEntries(AUDIO_RECITERS.map(r => [r.id, r]));
+const AUDIO_PROXY_BASE_URL = 'https://quran-audio-proxy.abdelrahmanmfadlallah.workers.dev';
 const AUDIO_DB_NAME = 'QuranAudioDB';
 const AUDIO_DB_VERSION = 1;
 const AUDIO_STORE = 'audio';
@@ -40666,9 +40667,10 @@ async function rebuildAudioDownloadIndexFromDB(){
     }
     const item = index.items[pairKey];
     item.downloadedAyahs += 1;
-    item.sizeBytes += Number(record.sizeBytes || (record.audio && record.audio.size) || 0);
+    const storedBlob = getStoredAudioBlob(record);
+    item.sizeBytes += Number(record.sizeBytes || (storedBlob && storedBlob.size) || 0);
     item.updatedAt = record.downloadedAt || item.updatedAt;
-    index.totalBytes += Number(record.sizeBytes || (record.audio && record.audio.size) || 0);
+    index.totalBytes += Number(record.sizeBytes || (storedBlob && storedBlob.size) || 0);
     index.totalRecords += 1;
   });
   saveAudioDownloadIndex(index);
@@ -40681,9 +40683,10 @@ async function upsertDownloadIndexEntry(reciter, surahNum){
   let sizeBytes = 0;
   for(const entry of ayahs){
     const record = await audioDbGet(getAudioStorageKey(reciter.id, surahNum, entry.ayahNumber));
-    if(record && isStoredAudioBlob(record.audio)){
+    const storedBlob = getStoredAudioBlob(record);
+    if(record && isStoredAudioBlob(storedBlob)){
       downloadedAyahs += 1;
-      sizeBytes += Number(record.sizeBytes || record.audio.size || 0);
+      sizeBytes += Number(record.sizeBytes || storedBlob.size || 0);
     }
   }
   const pairKey = getDownloadPairKey(reciter.id, surahNum);
@@ -40712,6 +40715,10 @@ function setAudioStatus(text){
 }
 function isStoredAudioBlob(value){
   return !!(value && typeof value.size === 'number' && typeof value.type === 'string');
+}
+function getStoredAudioBlob(record){
+  if(!record) return null;
+  return record.blob || record.audio || null;
 }
 function safeAudioPause(){
   try{ audioEl.pause(); }catch(e){}
@@ -40742,7 +40749,8 @@ function resetPlayerTimeUI(){
   if(mt) mt.textContent = '00:00';
 }
 function buildAudioUrl(reciter, globalAyahNumber){
-  return 'https://cdn.islamic.network/quran/audio/' + reciter.bitrate + '/' + reciter.id + '/' + globalAyahNumber + '.mp3';
+  const base = String(AUDIO_PROXY_BASE_URL || '').replace(/\/$/, '');
+  return base + '/audio/' + encodeURIComponent(reciter.id) + '/' + Number(globalAyahNumber) + '.mp3';
 }
 function getCurrentAyahPlaybackIndex(){
   if(!currentSurahNum) return 0;
@@ -40766,8 +40774,9 @@ function ensurePlaybackList(){
 async function resolveAyahAudioSource(reciter, surahNum, ayahNumber){
   const key = getAudioStorageKey(reciter.id, surahNum, ayahNumber);
   const record = await audioDbGet(key);
-  if(record && isStoredAudioBlob(record.audio)){
-    return {mode:'offline', label:'Offline', record, key};
+  const storedBlob = getStoredAudioBlob(record);
+  if(record && isStoredAudioBlob(storedBlob)){
+    return {mode:'offline', label:'Offline', blob:storedBlob, record, key};
   }
   const globalAyahNumber = getGlobalAyahNumber(surahNum, ayahNumber);
   if(!navigator.onLine){
@@ -40787,12 +40796,12 @@ async function loadAyahIntoPlayer(surahNum, ayahNumber, options){
   safeAudioLoad();
   if(source.mode === 'unavailable'){
     setAudioSourceChip('unavailable', 'غير متاح');
-    setAudioStatus('هذه السورة غير متاحة Offline. اتصل بالإنترنت لتحميلها.');
+    setAudioStatus('هذه الآية غير محفوظة للاستخدام بدون إنترنت.');
     resetPlayerTimeUI();
     return false;
   }
   if(source.mode === 'offline'){
-    currentObjectUrl = URL.createObjectURL(source.record.audio);
+    currentObjectUrl = URL.createObjectURL(source.blob);
     audioEl.src = currentObjectUrl;
     setAudioSourceChip('offline', 'Offline');
     setAudioStatus('تشغيل بدون إنترنت');
@@ -40969,7 +40978,8 @@ async function loadAudioForCurrentSurah(){
 async function downloadAyahForOffline(reciter, surahNum, ayahNumber){
   const key = getAudioStorageKey(reciter.id, surahNum, ayahNumber);
   const existing = await audioDbGet(key);
-  if(existing && isStoredAudioBlob(existing.audio)) return {status:'cached', record:existing};
+  const existingBlob = getStoredAudioBlob(existing);
+  if(existing && isStoredAudioBlob(existingBlob)) return {status:'cached', record:existing};
   const globalAyahNumber = getGlobalAyahNumber(surahNum, ayahNumber);
   const url = buildAudioUrl(reciter, globalAyahNumber);
   const response = await fetch(url, {cache:'no-store'});
@@ -40982,13 +40992,29 @@ async function downloadAyahForOffline(reciter, surahNum, ayahNumber){
     surahNumber: Number(surahNum),
     ayahNumber: Number(ayahNumber),
     globalAyahNumber: Number(globalAyahNumber),
-    audio: audioBlob,
+    blob: audioBlob,
     bitrate: reciter.bitrate,
     sizeBytes: audioBlob.size || 0,
     downloadedAt: new Date().toISOString()
   };
   await audioDbPut(record);
   return {status:'downloaded', record};
+}
+async function downloadAyahForOfflineWithRetry(reciter, surahNum, ayahNumber, maxAttempts){
+  let lastError = null;
+  const attempts = Math.max(1, Number(maxAttempts) || 1);
+  for(let attempt = 1; attempt <= attempts; attempt += 1){
+    try{
+      return await downloadAyahForOffline(reciter, surahNum, ayahNumber);
+    }catch(error){
+      lastError = error;
+      if(attempt < attempts){
+        setAudioStatus('إعادة محاولة تحميل الآية ' + ayahNumber + ' (' + (attempt + 1) + '/' + attempts + ')');
+        await new Promise(resolve => setTimeout(resolve, 350));
+      }
+    }
+  }
+  throw lastError || new Error('download failed');
 }
 async function downloadCurrentSurahOffline(onlyFailedAyahs){
   if(!currentSurahNum || !QURAN[currentSurahNum]) return;
@@ -41010,7 +41036,7 @@ async function downloadCurrentSurahOffline(onlyFailedAyahs){
   await refreshCurrentSurahOfflineUI();
   for(const ayahNumber of targetAyahs){
     try{
-      const result = await downloadAyahForOffline(reciter, currentSurahNum, ayahNumber);
+      const result = await downloadAyahForOfflineWithRetry(reciter, currentSurahNum, ayahNumber, 2);
       downloadState.completed += 1;
       if(result.status === 'cached'){
         setAudioStatus('الآية ' + ayahNumber + ' محفوظة مسبقًا.');
@@ -41021,7 +41047,7 @@ async function downloadCurrentSurahOffline(onlyFailedAyahs){
       console.error(error);
       downloadState.completed += 1;
       downloadState.failedAyahs.push(ayahNumber);
-      setAudioStatus('تعذر تحميل الآية ' + ayahNumber);
+      setAudioStatus('تعذر تحميل الآية ' + ayahNumber + ' بعد إعادة المحاولة');
     }
     await upsertDownloadIndexEntry(reciter, currentSurahNum);
     await refreshCurrentSurahOfflineUI();
@@ -41030,10 +41056,11 @@ async function downloadCurrentSurahOffline(onlyFailedAyahs){
   await upsertDownloadIndexEntry(reciter, currentSurahNum);
   await refreshCurrentSurahOfflineUI();
   await refreshAudioDownloadsUI();
+  const downloadedCount = downloadState.total - downloadState.failedAyahs.length;
   if(downloadState.failedAyahs.length){
-    setAudioStatus('اكتمل التحميل مع أخطاء في الآيات: ' + downloadState.failedAyahs.join('، '));
+    setAudioStatus('تم تنزيل ' + downloadedCount + ' / ' + downloadState.total + ' — فشل: ' + downloadState.failedAyahs.length);
   } else {
-    setAudioStatus('✓ تم تحميل السورة ويمكن استخدامها بدون إنترنت');
+    setAudioStatus('✓ تم تنزيل ' + downloadedCount + ' / ' + downloadState.total + ' ويمكن التشغيل بدون إنترنت');
   }
 }
 function retryFailedDownloads(){
