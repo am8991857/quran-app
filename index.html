@@ -323,6 +323,57 @@
   .audio-repeat-controls .settings-select{max-width:130px}
   .audio-inline-note{font-size:11px; color:var(--ink-soft); margin-top:6px}
   .audio-manager-empty{padding:16px; text-align:center; color:var(--ink-soft); font-size:12px; background:var(--card); border:1px dashed var(--border); border-radius:16px}
+  .tafsir-backdrop{
+    position:fixed; inset:0; background:rgba(17,12,16,.54); backdrop-filter:blur(4px);
+    display:none; align-items:center; justify-content:center; padding:18px; z-index:45;
+  }
+  .tafsir-backdrop.show{display:flex}
+  .tafsir-modal{
+    width:min(760px,100%); max-height:min(84vh, 920px); background:var(--card); border:1px solid var(--border);
+    border-radius:24px; box-shadow:0 24px 70px rgba(23,16,20,.24); overflow:hidden; display:flex; flex-direction:column;
+  }
+  .tafsir-modal-head{
+    padding:18px 18px 14px; border-bottom:1px solid var(--border); display:flex; align-items:flex-start; justify-content:space-between; gap:14px;
+    background:linear-gradient(180deg, rgba(233,196,140,.16), rgba(233,196,140,0));
+  }
+  .tafsir-modal-head-main{min-width:0; flex:1}
+  .tafsir-modal-title-row{display:flex; align-items:center; gap:10px; flex-wrap:wrap}
+  .tafsir-modal-title{margin:0; font-family:'Reem Kufi'; font-size:18px; color:var(--ink)}
+  .tafsir-close{
+    flex:none; width:40px; height:40px; border-radius:50%; border:1px solid var(--border); background:var(--card-alt);
+    color:var(--ink); font-size:18px; cursor:pointer;
+  }
+  .tafsir-meta{font-size:13px; color:var(--ink-soft); margin-top:8px}
+  .tafsir-ayah-box{
+    margin-top:12px; background:var(--card-alt); border:1px solid var(--border); border-radius:18px; padding:14px 16px;
+  }
+  .tafsir-ayah-text{
+    font-family:'Amiri Quran','Noto Naskh Arabic',serif; font-size:24px; line-height:2.05; color:var(--ink);
+  }
+  .tafsir-modal-body{padding:18px; overflow:auto; display:flex; flex-direction:column; gap:14px}
+  .tafsir-section-title{font-family:'Reem Kufi'; font-size:15px; color:var(--rose-deep); margin:0}
+  .tafsir-content{
+    background:var(--card-alt); border:1px solid var(--border); border-radius:18px; padding:16px; min-height:120px;
+    font-size:15px; line-height:2; color:var(--ink); white-space:pre-line;
+  }
+  .tafsir-content.loading,.tafsir-content.notice{display:flex; align-items:center; justify-content:center; text-align:center; color:var(--ink-soft)}
+  .tafsir-content.error{color:#A54545}
+  .tafsir-actions{display:flex; justify-content:flex-start; gap:8px; flex-wrap:wrap}
+  .tafsir-retry-btn{width:auto; padding:10px 16px}
+  [data-theme="dark"] .tafsir-modal{
+    box-shadow:0 24px 70px rgba(0,0,0,.42);
+    background:var(--card);
+  }
+  [data-theme="dark"] .tafsir-modal-head{
+    background:linear-gradient(180deg, rgba(100,80,40,.26), rgba(100,80,40,0));
+  }
+  @media (max-width: 420px){
+    .tafsir-backdrop{padding:10px}
+    .tafsir-modal{max-height:90vh; border-radius:20px}
+    .tafsir-modal-head{padding:14px 14px 12px}
+    .tafsir-modal-body{padding:14px}
+    .tafsir-ayah-text{font-size:21px; line-height:1.95}
+  }
   @media (max-width: 420px){
     .audio-now-top{align-items:flex-start; flex-direction:column}
     .audio-controls{gap:8px}
@@ -1015,6 +1066,31 @@
     </div>
   </div>
   <div class="audio-repeat-list" id="audio-repeat-list"></div>
+</div>
+
+<div class="tafsir-backdrop" id="tafsir-backdrop" onclick="onTafsirBackdropClick(event)" aria-hidden="true">
+  <div class="tafsir-modal" id="tafsir-modal" role="dialog" aria-modal="true" aria-labelledby="tafsir-modal-title" aria-describedby="tafsir-content" onclick="event.stopPropagation()">
+    <div class="tafsir-modal-head">
+      <div class="tafsir-modal-head-main">
+        <div class="tafsir-modal-title-row">
+          <h3 class="tafsir-modal-title" id="tafsir-modal-title">تفسير الآية</h3>
+          <span class="audio-now-chip online" id="tafsir-network-status">Online</span>
+        </div>
+        <div class="tafsir-meta" id="tafsir-modal-meta">سورة الفاتحة — الآية 1</div>
+        <div class="tafsir-ayah-box">
+          <div class="tafsir-ayah-text" id="tafsir-modal-ayah-text">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</div>
+        </div>
+      </div>
+      <button class="tafsir-close" id="tafsir-close-btn" type="button" onclick="closeTafsirModal()" aria-label="إغلاق">✕</button>
+    </div>
+    <div class="tafsir-modal-body">
+      <h4 class="tafsir-section-title">المختصر في التفسير</h4>
+      <div class="tafsir-content loading" id="tafsir-content">جاري تحميل التفسير...</div>
+      <div class="tafsir-actions">
+        <button class="danger-btn tafsir-retry-btn" id="tafsir-retry-btn" type="button" onclick="retryCurrentTafsirRequest()" style="display:none">إعادة المحاولة</button>
+      </div>
+    </div>
+  </div>
 </div>
 
 <audio id="player" preload="none"></audio>
@@ -39674,13 +39750,13 @@ function renderPage(pageNumber, options){
     }
     if(shouldSkipRenderedAyah(v.surah, v.ayahN, v.text)) return;
     if(split.isStandaloneAyah){
-      html += '<span class="ayah basmala-block" id="'+ayahDomId(v.surah, v.ayahN)+'" data-surah="'+v.surah+'" data-n="'+v.ayahN+'" data-page="'+v.page+'">'
+      html += '<span class="ayah basmala-block" id="'+ayahDomId(v.surah, v.ayahN)+'" data-surah="'+v.surah+'" data-n="'+v.ayahN+'" data-page="'+v.page+'" onclick="handleAyahClick('+v.surah+', '+v.ayahN+')">'
         + wrapWords(split.verseText, v.surah, v.ayahN)
         + '<span class="ayah-num" data-surah="'+v.surah+'" data-ayah="'+v.ayahN+'" onclick="onAyahNumClick(this, '+v.surah+', '+v.ayahN+')">'+getDisplayAyahNumber(v.surah, v.ayahN)+'</span></span> ';
       return;
     }
     const verseText = split.verseText || normalizeVerseSpacing(v.text);
-    html += '<span class="ayah" id="'+ayahDomId(v.surah, v.ayahN)+'" data-surah="'+v.surah+'" data-n="'+v.ayahN+'" data-page="'+v.page+'">'
+    html += '<span class="ayah" id="'+ayahDomId(v.surah, v.ayahN)+'" data-surah="'+v.surah+'" data-n="'+v.ayahN+'" data-page="'+v.page+'" onclick="handleAyahClick('+v.surah+', '+v.ayahN+')">'
       + wrapWords(verseText, v.surah, v.ayahN)
       + '<span class="ayah-num" data-surah="'+v.surah+'" data-ayah="'+v.ayahN+'" onclick="onAyahNumClick(this, '+v.surah+', '+v.ayahN+')">'+getDisplayAyahNumber(v.surah, v.ayahN)+'</span></span> ';
   });
@@ -40495,9 +40571,13 @@ const AUDIO_RECITERS = [
 ];
 const RECITER_BY_ID = Object.fromEntries(AUDIO_RECITERS.map(r => [r.id, r]));
 const AUDIO_PROXY_BASE_URL = 'https://quran-audio-proxy.abdelrahmanmfadlallah.workers.dev';
+const TAFSIR_PROXY_BASE_URL = AUDIO_PROXY_BASE_URL;
 const AUDIO_DB_NAME = 'QuranAudioDB';
-const AUDIO_DB_VERSION = 1;
+const AUDIO_DB_VERSION = 2;
 const AUDIO_STORE = 'audio';
+const TAFSIR_STORE = 'tafsir';
+const TAFSIR_BOOK_ID = 200;
+const TAFSIR_SOURCE = 'mokhtasr';
 const AUDIO_INDEX_STORAGE_KEY = 'offlineAudioIndex.v1';
 const AYAH_REPEAT_STORAGE_PREFIX = 'ayahRepeats:';
 let audioDbPromise = null;
@@ -40581,6 +40661,7 @@ function openAudioDB(){
     req.onupgradeneeded = (e)=>{
       const db = e.target.result;
       if(!db.objectStoreNames.contains(AUDIO_STORE)) db.createObjectStore(AUDIO_STORE, {keyPath:'key'});
+      if(!db.objectStoreNames.contains(TAFSIR_STORE)) db.createObjectStore(TAFSIR_STORE, {keyPath:'key'});
     };
     req.onsuccess = ()=> resolve(req.result);
     req.onerror = ()=> reject(req.error);
@@ -40630,6 +40711,30 @@ function audioDbGetAllByCursor(){
     };
     req.onerror = ()=> rej(req.error);
   })).catch(()=>[]);
+}
+function getTafsirStorageKey(surahNum, ayahNumber){
+  return Number(surahNum) + '_' + Number(ayahNumber);
+}
+function tafsirDbGet(surahNum, ayahNumber){
+  const key = getTafsirStorageKey(surahNum, ayahNumber);
+  return openAudioDB().then(db => new Promise((res, rej)=>{
+    const tx = db.transaction(TAFSIR_STORE, 'readonly');
+    const req = tx.objectStore(TAFSIR_STORE).get(key);
+    req.onsuccess = ()=> res(req.result || null);
+    req.onerror = ()=> rej(req.error);
+  })).catch(()=>null);
+}
+function tafsirDbPut(record){
+  return openAudioDB().then(db => new Promise((res, rej)=>{
+    const tx = db.transaction(TAFSIR_STORE, 'readwrite');
+    tx.objectStore(TAFSIR_STORE).put(record);
+    tx.oncomplete = ()=> res(true);
+    tx.onerror = ()=> rej(tx.error);
+  })).catch(()=>false);
+}
+function buildTafsirUrl(surahNum, ayahNumber){
+  const base = String(TAFSIR_PROXY_BASE_URL || '').replace(/\/$/, '');
+  return base + '/tafsir/' + Number(surahNum) + '/' + Number(ayahNumber);
 }
 function loadAudioDownloadIndex(){
   if(audioDownloadIndexCache) return audioDownloadIndexCache;
@@ -41286,8 +41391,149 @@ audioEl.addEventListener('ended', async ()=>{
     stopPlayback(true);
   }
 });
-window.addEventListener('online', ()=> refreshCurrentSurahOfflineUI());
-window.addEventListener('offline', ()=> refreshCurrentSurahOfflineUI());
+window.addEventListener('online', ()=> { refreshCurrentSurahOfflineUI(); updateTafsirNetworkState(); });
+window.addEventListener('offline', ()=> { refreshCurrentSurahOfflineUI(); updateTafsirNetworkState(); });
+
+let tafsirRequestToken = 0;
+let tafsirLastFocusEl = null;
+function getAyahTextForTafsir(surahNum, ayahNumber){
+  const ayah = getAyahRecord(surahNum, ayahNumber);
+  if(!ayah) return '';
+  const split = splitBasmalaFromAyah(surahNum, ayahNumber, ayah.text);
+  if(split.isStandaloneAyah) return split.verseText || normalizeVerseSpacing(ayah.text);
+  return split.verseText || normalizeVerseSpacing(ayah.text);
+}
+function setTafsirContentState(message, type){
+  const el = document.getElementById('tafsir-content');
+  if(!el) return;
+  el.className = 'tafsir-content ' + (type || 'notice');
+  el.textContent = message || '';
+}
+function updateTafsirNetworkState(){
+  const badge = document.getElementById('tafsir-network-status');
+  if(!badge) return;
+  if(navigator.onLine){
+    badge.className = 'audio-now-chip online';
+    badge.textContent = 'Online';
+  } else {
+    badge.className = 'audio-now-chip offline';
+    badge.textContent = 'Offline';
+  }
+}
+function openTafsirModal(surahNum, ayahNumber){
+  const surah = QURAN[surahNum];
+  const backdrop = document.getElementById('tafsir-backdrop');
+  const modal = document.getElementById('tafsir-modal');
+  if(!surah || !backdrop || !modal) return;
+  tafsirLastFocusEl = document.activeElement;
+  modal.dataset.surah = String(Number(surahNum));
+  modal.dataset.ayah = String(Number(ayahNumber));
+  document.getElementById('tafsir-modal-meta').textContent = 'سورة ' + surah.name + ' — الآية ' + ayahNumber;
+  document.getElementById('tafsir-modal-ayah-text').textContent = getAyahTextForTafsir(surahNum, ayahNumber);
+  document.getElementById('tafsir-retry-btn').style.display = 'none';
+  updateTafsirNetworkState();
+  setTafsirContentState('جاري تحميل التفسير...', 'loading');
+  backdrop.classList.add('show');
+  backdrop.setAttribute('aria-hidden', 'false');
+  document.body.style.overflow = 'hidden';
+  document.addEventListener('keydown', onTafsirKeydown);
+  setTimeout(()=>{
+    const closeBtn = document.getElementById('tafsir-close-btn');
+    if(closeBtn) closeBtn.focus();
+  }, 0);
+}
+function closeTafsirModal(options){
+  options = options || {};
+  const backdrop = document.getElementById('tafsir-backdrop');
+  if(!backdrop) return;
+  backdrop.classList.remove('show');
+  backdrop.setAttribute('aria-hidden', 'true');
+  document.body.style.overflow = '';
+  document.removeEventListener('keydown', onTafsirKeydown);
+  if(options.restoreFocus !== false && tafsirLastFocusEl && typeof tafsirLastFocusEl.focus === 'function'){
+    try{ tafsirLastFocusEl.focus(); }catch(e){}
+  }
+}
+function onTafsirBackdropClick(event){
+  if(event && event.target && event.target.id === 'tafsir-backdrop') closeTafsirModal();
+}
+function onTafsirKeydown(event){
+  if(event.key === 'Escape') closeTafsirModal();
+}
+async function fetchTafsirFromWorker(surahNum, ayahNumber){
+  const response = await fetch(buildTafsirUrl(surahNum, ayahNumber), {cache:'no-store'});
+  let payload = null;
+  try{ payload = await response.json(); }catch(e){}
+  if(!response.ok){
+    const error = new Error(payload && payload.error ? payload.error : ('HTTP ' + response.status));
+    error.status = response.status;
+    throw error;
+  }
+  const tafsirText = payload && typeof payload.tafsir === 'string' ? payload.tafsir.trim() : '';
+  if(!tafsirText) throw new Error('empty tafsir');
+  const record = {
+    key: getTafsirStorageKey(surahNum, ayahNumber),
+    sura: Number(surahNum),
+    aya: Number(ayahNumber),
+    tafsir: tafsirText,
+    source: payload.source || TAFSIR_SOURCE,
+    bookId: Number(payload.book_id || TAFSIR_BOOK_ID),
+    savedAt: Date.now()
+  };
+  await tafsirDbPut(record);
+  return record;
+}
+async function loadTafsirForAyah(surahNum, ayahNumber, options){
+  options = options || {};
+  const token = ++tafsirRequestToken;
+  const cached = !options.forceRefresh ? await tafsirDbGet(surahNum, ayahNumber) : null;
+  if(token !== tafsirRequestToken) return;
+  if(cached && cached.tafsir){
+    document.getElementById('tafsir-retry-btn').style.display = 'none';
+    setTafsirContentState(cached.tafsir, 'ready');
+    return;
+  }
+  if(!navigator.onLine){
+    document.getElementById('tafsir-retry-btn').style.display = 'none';
+    setTafsirContentState('تفسير هذه الآية غير محفوظ للاستخدام بدون إنترنت.', 'notice');
+    return;
+  }
+  try{
+    const record = await fetchTafsirFromWorker(surahNum, ayahNumber);
+    if(token !== tafsirRequestToken) return;
+    document.getElementById('tafsir-retry-btn').style.display = 'none';
+    setTafsirContentState(record.tafsir, 'ready');
+  }catch(error){
+    if(token !== tafsirRequestToken) return;
+    console.error(error);
+    const retryBtn = document.getElementById('tafsir-retry-btn');
+    retryBtn.style.display = 'inline-flex';
+    if(error && error.status === 404){
+      setTafsirContentState('لا يوجد تفسير متاح لهذه الآية.', 'error');
+    } else {
+      setTafsirContentState('تعذر تحميل التفسير، حاول مرة أخرى.', 'error');
+    }
+  }
+}
+function retryCurrentTafsirRequest(){
+  const modal = document.getElementById('tafsir-modal');
+  if(!modal) return;
+  const surahNum = Number(modal.dataset.surah || 0);
+  const ayahNumber = Number(modal.dataset.ayah || 0);
+  if(!surahNum || !ayahNumber) return;
+  document.getElementById('tafsir-retry-btn').style.display = 'none';
+  setTafsirContentState('جاري تحميل التفسير...', 'loading');
+  loadTafsirForAyah(surahNum, ayahNumber, {forceRefresh:true});
+}
+function handleAyahClick(surahNum, ayahNumber){
+  if(memorizeOn || testOn) return;
+  const surah = QURAN[surahNum];
+  const ayah = getAyahRecord(surahNum, ayahNumber);
+  if(!surah || !ayah) return;
+  setCurrentAyah(ayahNumber, surahNum, {skipPageSync:true});
+  openTafsirModal(surahNum, ayahNumber);
+  loadTafsirForAyah(surahNum, ayahNumber);
+}
 
 /* ==== المفضلة ==== */
 function getFavorites(){
@@ -41664,6 +41910,7 @@ async function initializeApp(){
     refreshReciterUI();
     await syncAudioStateWithCurrentSurah();
     await refreshAudioDownloadsUI();
+    updateTafsirNetworkState();
   }catch(error){
     console.error(error);
     document.getElementById('surah-list').innerHTML = '<div class="empty-note">تعذر تحميل بيانات القرآن.</div>';
